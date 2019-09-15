@@ -1,4 +1,5 @@
 import 'package:chopper/chopper.dart';
+import 'package:crypto_app/connected_interceptor.dart';
 
 import 'env.dart';
 
@@ -19,6 +20,7 @@ abstract class CryptoApiService extends ChopperService {
         interceptors: [
           HeadersInterceptor(
               {'authorization': 'Apikey ${enviroment['apiKey']}'}),
+          ConnectedInterceptor(),
         ]);
 
     return _$CryptoApiService(client);

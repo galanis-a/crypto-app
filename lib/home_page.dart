@@ -27,6 +27,16 @@ class HomePage extends StatelessWidget {
       future: Provider.of<CryptoApiService>(context).getTop10(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                snapshot.error.toString(),
+                textAlign: TextAlign.center,
+                textScaleFactor: 1.3,
+              ),
+            );
+          }
+
           final List cryptos = json.decode(snapshot.data.bodyString)["Data"];
           return _buildCryptos(context, cryptos);
         } else {
