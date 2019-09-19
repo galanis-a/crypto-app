@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+import 'package:crypto_app/model/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:chopper/chopper.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +36,7 @@ class HomePage extends StatelessWidget {
             );
           }
 
-          final List cryptos = json.decode(snapshot.data.bodyString)["Data"];
+          final Crypto cryptos = snapshot.data.body;
           return _buildCryptos(context, cryptos);
         } else {
           return Center(
@@ -48,19 +47,19 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  ListView _buildCryptos(BuildContext context, List cryptos) {
+  ListView _buildCryptos(BuildContext context, Crypto cryptos) {
     return ListView.builder(
-      itemCount: cryptos.length,
+      itemCount: cryptos.data.length,
       padding: EdgeInsets.all(8),
       itemBuilder: (context, index) {
         return Card(
           elevation: 4,
           child: ListTile(
             title: Text(
-              cryptos[index]['CoinInfo']['Name'],
+              cryptos.data[index].coinInfo.name,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            subtitle: Text(cryptos[index]['DISPLAY']['USD']['PRICE']),
+            // subtitle: Text(cryptos[index]['DISPLAY']['USD']['PRICE']),
           ),
         );
       },
