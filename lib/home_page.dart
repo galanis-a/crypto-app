@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 
 import 'crypto_api_service.dart';
 
+import 'env.dart';
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -59,7 +61,7 @@ class HomePage extends StatelessWidget {
           child: ListTile(
             leading: CachedNetworkImage(
               imageUrl:
-                  'https://www.cryptocompare.com${data[index].coinInfo.imageUrl}',
+                  '${enviroment['imgBaseUrl']}${data[index].coinInfo.imageUrl}',
               placeholder: (context, url) => CircularProgressIndicator(),
               errorWidget: (context, url, error) => Icon(Icons.error),
             ),
