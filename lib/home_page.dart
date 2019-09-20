@@ -1,15 +1,21 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:crypto_app/model/crypto.dart';
 import 'package:flutter/material.dart';
-import 'package:chopper/chopper.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'crypto_api_service.dart';
-
+import 'bloc/bloc.dart';
+import 'bloc/crypto_bloc.dart';
 import 'env.dart';
+import 'model/crypto.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final cryptoBloc = CryptoBloc();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,33 +27,20 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: _buildBody(context),
-    );
-  }
-
-  FutureBuilder<Response> _buildBody(BuildContext context) {
-    return FutureBuilder<Response>(
-      future: Provider.of<CryptoApiService>(context).getTop10(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasError) {
-            return Center(
-              child: Text(
-                snapshot.error.toString(),
-                textAlign: TextAlign.center,
-                textScaleFactor: 1.3,
-              ),
-            );
+      body: BlocBuilder(
+        bloc: cryptoBloc,
+        builder: (BuildContext context, CryptoState state) {
+          if (state is InitialCryptoState) {
+            cryptoBloc.dispatch(GetCryptos('EUR'));
+          } else if (state is CryptosLoaded) {
+            return _buildCryptos(context, state.crypto.data);
           }
 
-          final BuiltList<CoinData> coinData = snapshot.data.body.data;
-          return _buildCryptos(context, coinData);
-        } else {
           return Center(
             child: CircularProgressIndicator(),
           );
-        }
-      },
+        },
+      ),
     );
   }
 
@@ -74,5 +67,12 @@ class HomePage extends StatelessWidget {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    cryptoBloc.dispose();
   }
 }

@@ -1,9 +1,9 @@
 import 'package:chopper/chopper.dart';
-import 'package:crypto_app/connected_interceptor.dart';
-import 'package:crypto_app/model/crypto.dart';
 
 import 'built_value_converter.dart';
+import 'connected_interceptor.dart';
 import 'env.dart';
+import 'model/crypto.dart';
 
 part 'crypto_api_service.chopper.dart';
 

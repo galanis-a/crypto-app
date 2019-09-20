@@ -1,7 +1,7 @@
-import 'package:crypto_app/crypto_api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'crypto_api_service.dart';
 import 'home_page.dart';
 
 void main() => runApp(MyApp());

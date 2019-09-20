@@ -1,4 +1,5 @@
 import 'package:chopper/chopper.dart';
+
 import 'model/serializers.dart';
 
 class BuiltValueConverter extends JsonConverter {
