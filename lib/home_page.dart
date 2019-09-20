@@ -33,15 +33,23 @@ class _HomePageState extends State<HomePage> {
           if (state is InitialCryptoState) {
             cryptoBloc.dispatch(GetCryptos('EUR'));
           } else if (state is CryptosLoaded) {
-            return _buildCryptos(context, state.crypto.data);
+            return RefreshIndicator(
+              child: _buildCryptos(context, state.crypto.data),
+              onRefresh: () {
+                return _refreshCryptos();
+              },
+            );
           }
-
           return Center(
             child: CircularProgressIndicator(),
           );
         },
       ),
     );
+  }
+
+  Future<void> _refreshCryptos() async {
+    cryptoBloc.dispatch(GetCryptos('EUR'));
   }
 
   ListView _buildCryptos(BuildContext context, BuiltList<CoinData> data) {
