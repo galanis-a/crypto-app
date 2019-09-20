@@ -10,6 +10,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(CoinData.serializer)
       ..add(CoinInfo.serializer)
       ..add(Crypto.serializer)
+      ..add(Currency.serializer)
+      ..add(Display.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(CoinData)]),
           () => new ListBuilder<CoinData>()))

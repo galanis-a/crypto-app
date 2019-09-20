@@ -11,7 +11,7 @@ part 'crypto_api_service.chopper.dart';
 abstract class CryptoApiService extends ChopperService {
   @Get(path: 'top/totalvolfull')
   Future<Response<Crypto>> getTop10(
-      {@Query('limit') int limit = 10, @Query('tsym') String tsym = 'USD'});
+      {@Query('limit') int limit = 10, @Query('tsym') String tsym = 'EUR'});
 
   static CryptoApiService create() {
     final client = ChopperClient(

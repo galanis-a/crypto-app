@@ -14,7 +14,7 @@ class _$CryptoApiService extends CryptoApiService {
 
   final definitionType = CryptoApiService;
 
-  Future<Response<Crypto>> getTop10({int limit = 10, String tsym = 'USD'}) {
+  Future<Response<Crypto>> getTop10({int limit = 10, String tsym = 'EUR'}) {
     final $url = '/data/top/totalvolfull';
     final Map<String, dynamic> $params = {'limit': limit, 'tsym': tsym};
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
