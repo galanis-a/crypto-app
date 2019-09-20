@@ -24,6 +24,7 @@ dependencies:
   connectivity: ^0.4.4
   built_value: ^6.7.1
   built_collection: ^4.2.2
+  cached_network_image: ^1.1.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

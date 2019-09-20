@@ -1,4 +1,5 @@
 import 'package:built_collection/built_collection.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crypto_app/model/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:chopper/chopper.dart';
@@ -56,8 +57,14 @@ class HomePage extends StatelessWidget {
         return Card(
           elevation: 4,
           child: ListTile(
+            leading: CachedNetworkImage(
+              imageUrl:
+                  'https://www.cryptocompare.com${data[index].coinInfo.imageUrl}',
+              placeholder: (context, url) => CircularProgressIndicator(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
             title: Text(
-              data[index].coinInfo.name,
+              data[index].coinInfo.fullName,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Text(data[index].display.currency.price),
