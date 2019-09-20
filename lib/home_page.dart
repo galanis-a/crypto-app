@@ -7,6 +7,7 @@ import 'bloc/bloc.dart';
 import 'bloc/crypto_bloc.dart';
 import 'env.dart';
 import 'model/crypto.dart';
+import 'preference_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -26,6 +27,19 @@ class _HomePageState extends State<HomePage> {
         ),
         backgroundColor: Colors.white,
         elevation: 0,
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => PreferencePage(),
+              ));
+            },
+          )
+        ],
       ),
       body: BlocBuilder(
         bloc: cryptoBloc,
