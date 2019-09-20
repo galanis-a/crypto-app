@@ -168,10 +168,8 @@ class DisplaySerializer implements StructuredSerializer<Display> {
       iterator.moveNext();
       final dynamic value = iterator.current;
 
-      if (key == 'EUR') {
-        result.currency.replace(serializers.deserialize(value,
-            specifiedType: const FullType(Currency)) as Currency);
-      }
+      result.currency.replace(serializers.deserialize(value,
+          specifiedType: const FullType(Currency)) as Currency);
     }
 
     return result.build();
