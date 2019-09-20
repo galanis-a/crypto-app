@@ -9,16 +9,11 @@ import 'env.dart';
 import 'model/crypto.dart';
 import 'preference_page.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final cryptoBloc = CryptoBloc();
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final cryptoBloc = BlocProvider.of<CryptoBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -35,7 +30,9 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.settings),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => PreferencePage(),
+                builder: (context) {
+                  return PreferencePage();
+                },
               ));
             },
           )
@@ -50,7 +47,7 @@ class _HomePageState extends State<HomePage> {
             return RefreshIndicator(
               child: _buildCryptos(context, state.crypto.data),
               onRefresh: () {
-                return _refreshCryptos();
+                return _refreshCryptos(context, state);
               },
             );
           }
@@ -62,7 +59,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<void> _refreshCryptos() async {
+  Future<void> _refreshCryptos(context, state) async {
+    final cryptoBloc = BlocProvider.of<CryptoBloc>(context);
     cryptoBloc.dispatch(GetCryptos('EUR'));
   }
 
@@ -89,12 +87,5 @@ class _HomePageState extends State<HomePage> {
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-
-    cryptoBloc.dispose();
   }
 }

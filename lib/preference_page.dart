@@ -2,6 +2,8 @@ import 'package:crypto_app/currencies.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'bloc/bloc.dart';
+
 class PreferencePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,8 @@ class PreferencePage extends StatelessWidget {
               leading: Icon(currenciesData[currency]['icon'] as IconData),
               title: Text(currenciesData[currency]['name']),
               onTap: () {
+                BlocProvider.of<CryptoBloc>(context)
+                    .dispatch(GetCryptos(currenciesData[currency]['sym']));
                 Navigator.of(context).pop();
               },
             ),
