@@ -2,8 +2,8 @@ import 'package:crypto_app/currencies.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'bloc/crypto/bloc.dart';
-import 'bloc/sym/bloc.dart';
+import '../bloc/crypto/bloc.dart';
+import '../bloc/sym/bloc.dart';
 
 class PreferencePage extends StatelessWidget {
   @override

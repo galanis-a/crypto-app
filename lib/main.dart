@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/crypto/bloc.dart';
 import 'bloc/sym/bloc.dart';
-import 'home_page.dart';
+import 'pages/home_page.dart';
 
 void main() => runApp(MyApp());
 
