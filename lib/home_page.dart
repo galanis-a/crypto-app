@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
         bloc: cryptoBloc,
         builder: (BuildContext context, CryptoState state) {
           if (state is InitialCryptoState) {
-            cryptoBloc.dispatch(GetCryptos('EUR'));
+            cryptoBloc.dispatch(GetCryptos());
           } else if (state is CryptosLoaded) {
             return RefreshIndicator(
               child: _buildCryptos(context, state.crypto.data),
@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
 
   Future<void> _refreshCryptos(context, state) async {
     final cryptoBloc = BlocProvider.of<CryptoBloc>(context);
-    cryptoBloc.dispatch(GetCryptos('EUR'));
+    cryptoBloc.dispatch(GetCryptos());
   }
 
   ListView _buildCryptos(BuildContext context, BuiltList<CoinData> data) {

@@ -6,8 +6,4 @@ abstract class CryptoEvent extends Equatable {
   CryptoEvent([List props = const <dynamic>[]]) : super(props);
 }
 
-class GetCryptos extends CryptoEvent {
-  final String sym;
-
-  GetCryptos(this.sym) : super([sym]);
-}
+class GetCryptos extends CryptoEvent {}

@@ -9,5 +9,5 @@ abstract class SymState extends Equatable {
 class InitialSymState extends SymState {
   final String sym;
 
-  InitialSymState(this.sym) : super([sym]);
+  InitialSymState({this.sym = 'EUR'}) : super([sym]);
 }
