@@ -4,10 +4,12 @@ import 'package:bloc/bloc.dart';
 import 'package:chopper/chopper.dart';
 
 import './bloc.dart';
-import '../crypto_api_service.dart';
-import '../model/crypto.dart';
+import '../../crypto_api_service.dart';
+import '../../model/crypto.dart';
 
 class CryptoBloc extends Bloc<CryptoEvent, CryptoState> {
+  CryptoApiService service;
+
   @override
   CryptoState get initialState => InitialCryptoState();
 
@@ -23,6 +25,20 @@ class CryptoBloc extends Bloc<CryptoEvent, CryptoState> {
   }
 
   Future<Response<Crypto>> _fetchCryptosFromApi(String sym) async {
-    return CryptoApiService.create().getTop10(tsym: sym);
+    return _getService().getTop10(tsym: sym);
+  }
+
+  CryptoApiService _getService() {
+    if (service == null) {
+      service = CryptoApiService.create();
+    }
+
+    return service;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    service.dispose();
   }
 }

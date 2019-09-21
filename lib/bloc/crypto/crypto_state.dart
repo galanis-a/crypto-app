@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../model/crypto.dart';
+import '../../model/crypto.dart';
 
 @immutable
 abstract class CryptoState extends Equatable {
