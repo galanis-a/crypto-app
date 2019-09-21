@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/crypto/bloc.dart';
 import '../env.dart';
 import '../model/crypto.dart';
+import 'crypto_page.dart';
 import 'preference_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -77,6 +78,10 @@ class HomePage extends StatelessWidget {
               placeholder: (context, url) => CircularProgressIndicator(),
               errorWidget: (context, url, error) => Icon(Icons.error),
             ),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => CryptoPage(data[index])));
+            },
             title: Text(
               data[index].coinInfo.fullName,
               style: TextStyle(fontWeight: FontWeight.bold),
